@@ -1,0 +1,45 @@
+---
+title: "DATA481Gasoline"
+author: "Mihir Harshe"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+gas <- readr::read_csv(
+  "/Users/Mihir/Downloads/weekly_gas_prices.csv"
+)
+
+glimpse(gas)
+dim(gas)
+names(gas)
+summary(gas)
+
+if (!dir.exists("RData")) {
+  dir.create("RData")
+}
+
+save(gas, file = "RData/gasoline_raw.RData")
+
+gas_clean <- gas %>%
+  mutate(date = as.Date(date, format = "%m/%d/%y")) %>%
+  filter(fuel == "gasoline", formulation == "all") %>%
+  group_by(date, grade) %>%
+  summarise(
+    avg_price = mean(price, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ggplot(gas_clean, aes(x = date, y = avg_price, color = grade)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Gasoline Prices Over Time by Fuel Grade",
+    x = "Date",
+    y = "Average Price per Gallon (USD)",
+    color = "Fuel Grade"
+  ) +
+  theme_minimal()
+```
