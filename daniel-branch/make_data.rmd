@@ -1,0 +1,22 @@
+make_data
+# Section 1: Describe the task
+
+
+# Section 2: What you hope to discover in this task
+
+# Section 3: Code and text to retrieve the data set
+```{r}
+weekly_gas_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-07-01/weekly_gas_prices.csv')
+```
+
+```{r}
+install.packages("ggplot2")
+install.packages("dplyr")
+```
+
+```{r}
+rmarkdown::render("make_data.Rmd")
+```
+# Section 4: Verify dimensions and variables
+# Section 5: Save locally to sub-folder "RData“
+# Section 6: Describe results
