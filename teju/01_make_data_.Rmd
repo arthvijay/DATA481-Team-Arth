@@ -1,0 +1,57 @@
+# section 1: describe the task
+
+This task is to see the effects of certain features on gas prices using a multi-variable regression plot. The features will be date, fuel, grade, and formulation. Some of these features are categorial and some are numerical, so I will have to standardize them. 
+
+# section 2: what you hope to discover in this task
+
+I hope to discover patterns within the dataset pointing towards which features are strong in predicting price and seeing how much influence certain features have on price. 
+
+
+# section 3: code and text to retreive this data set
+
+```{r}
+# Using R
+weekly_gas_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-07-01/weekly_gas_prices.csv')
+
+```
+```{r}
+install.packages("ggplot2")
+install.packages("dplyr")
+```
+
+```{r}
+library(ggplot2)
+library(scales)
+library(dplyr)
+
+weekly_gas_prices_clean <- weekly_gas_prices %>% 
+  filter(formulation %in% c("all", "conventional", "reformulated"))
+
+ggplot(weekly_gas_prices_clean, aes(x = date, y = price, color = grade)) +
+  geom_line(alpha = 0.3) + 
+  geom_smooth(method = "lm", se = FALSE, size = 1) + 
+  
+  facet_wrap(~formulation, nrow = 1, scales = "free_x") + 
+  
+  scale_y_continuous(labels = scales::dollar_format()) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.spacing = unit(2, "lines"), 
+    strip.text = element_text(face = "bold")
+  ) +
+  labs(
+    title = "Comparison of Gas Price Trends by Formulation",
+    x = "Year",
+    y = "Price per Gallon"
+  )
+```
+
+
+# section 4: verify dimensions and variables
+
+The variables I will be using is price, grade, date, and formulation.
+
+# section 6: describe results
+
+This regression plots show a consistent long term price increase across all fuel formulations, with peaks seen in 2008 and 2022. There is a clear price hierarchy where Premium consistently remains the most expensive grade, followed by Midgrade and Regular. By placing the facets side by side, the data reveals that while prices have risen, the relative cost gap between different gas grades has remained remarkably constant over the last thirty years.
