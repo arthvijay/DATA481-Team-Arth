@@ -1,0 +1,268 @@
+---
+title: "01_make_data"
+author: "Pranav Turlapati"
+date: "2026-01-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+In this task, I will load a dataset of weekly gasoline prices, clean and standardize variables (especially the date and price fields), explore overall trends over time, and produce descriptive summaries and visualizations. The main deliverable is a clear “killer graph” that communicates the most important pattern in gas prices across time.
+
+Do crude oil prices lead gas prices, and by how many weeks?
+
+
+
+```{r cars}
+library(tidyverse)
+library(lubridate)
+library(scales)
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+
+getwd()
+list.files()
+
+gas <- read_csv("weekly_gas_prices.csv")
+
+
+```
+
+```{r}
+# Dimensions
+dim(gas)
+
+# Column names
+names(gas)
+
+# Quick structure / types
+glimpse(gas)
+
+# Preview
+head(gas, 10)
+
+
+# Missingness check
+colSums(is.na(gas))
+```
+
+```{r}
+names(gas)[str_detect(names(gas), "date|week|time")]
+
+# Look for likely price columns
+names(gas)[str_detect(names(gas), "price|gas|usd|dollar")]
+```
+
+
+```{r}
+# ---- CHANGE THESE TWO LINES AFTER YOU INSPECT COLUMN NAMES ----
+date_col  <- "date"    # e.g., "week", "date", "timestamp"
+price_col <- "price"   # e.g., "price", "regular", "avg_price"
+# --------------------------------------------------------------
+
+gas_clean <- gas |>
+  mutate(
+    date = as.Date(.data[[date_col]]),  # if already ISO-like, this works
+    price = as.numeric(.data[[price_col]])
+  ) |>
+  filter(!is.na(date), !is.na(price)) |>
+  arrange(date)
+
+# Verify cleaned result
+glimpse(gas_clean)
+summary(gas_clean$price)
+
+```
+```{r}
+gas_summary <- gas_clean |>
+  summarise(
+    start_date = min(date),
+    end_date   = max(date),
+    n_weeks    = n(),
+    mean_price = mean(price),
+    median_price = median(price),
+    min_price  = min(price),
+    max_price  = max(price),
+    sd_price   = sd(price)
+  )
+
+gas_summary
+
+```
+
+
+```{r}
+gas_by_year <- gas_clean |>
+  mutate(year = year(date)) |>
+  group_by(year) |>
+  summarise(
+    avg_price = mean(price),
+    min_price = min(price),
+    max_price = max(price),
+    .groups = "drop"
+  )
+
+gas_by_year
+
+```
+```{r}
+install.packages("quantmod")  # once
+library(quantmod)
+```
+```{r}
+getSymbols("DCOILWTICO", src = "FRED")
+
+oil_daily <- tibble(
+  date = index(DCOILWTICO),
+  oil_price = as.numeric(DCOILWTICO)
+)
+```
+
+```{r}
+oil_weekly <- oil_daily |>
+  filter(!is.na(oil_price)) |>
+  mutate(week = floor_date(date, "week")) |>
+  group_by(week) |>
+  summarise(oil_price = mean(oil_price), .groups = "drop")
+```
+
+```{r}
+combined <- gas_clean |>
+  mutate(week = floor_date(date, "week")) |>
+  inner_join(oil_weekly, by = "week") |>
+  arrange(week)
+```
+
+```{r}
+combined <- combined |>
+  mutate(
+    gas_z = as.numeric(scale(price)),
+    oil_z = as.numeric(scale(oil_price))
+  )
+
+```
+
+```{r}
+ccf_result <- ccf(
+  combined$oil_z,
+  combined$gas_z,
+  lag.max = 20,
+  plot = TRUE,
+  main = "Cross-Correlation: Oil Prices Leading Gas Prices"
+)
+
+```
+```{r}
+combined_diff <- combined |>
+  arrange(week) |>
+  mutate(
+    gas_diff = price - dplyr::lag(price),
+    oil_diff = oil_price - dplyr::lag(oil_price)
+  ) |>
+  filter(!is.na(gas_diff), !is.na(oil_diff))
+
+combined_diff <- combined_diff |>
+  mutate(
+    gas_diff_z = as.numeric(scale(gas_diff)),
+    oil_diff_z = as.numeric(scale(oil_diff))
+  )
+
+ccf_diff <- ccf(
+  combined_diff$oil_diff_z,
+  combined_diff$gas_diff_z,
+  lag.max = 20,
+  plot = TRUE,
+  main = "Cross-Correlation of Weekly Price Changes\n(Oil Leading Gas)"
+)
+
+```
+```{r}
+ccf_diff <- ccf(
+  combined_diff$oil_diff_z,
+  combined_diff$gas_diff_z,
+  lag.max = 20,
+  plot = FALSE
+)
+
+df_ccf <- tibble(
+  lag = as.integer(ccf_diff$lag),
+  corr = as.numeric(ccf_diff$acf)
+)
+
+# best (strongest absolute) lag
+best_i <- which.max(abs(df_ccf$corr))
+best_lag <- df_ccf$lag[best_i]
+best_corr <- df_ccf$corr[best_i]
+
+# significance lines (same idea as the blue dashed lines in base plot)
+n <- nrow(combined_diff)
+sig <- 1.96 / sqrt(n)
+
+library(ggplot2)
+
+ggplot(df_ccf, aes(x = lag, y = corr)) +
+  geom_hline(yintercept = c(-sig, sig), linetype = "dashed") +
+  geom_hline(yintercept = 0) +
+  geom_col(alpha = 0.7) +
+  geom_col(data = df_ccf[best_i, ], alpha = 1) +
+  geom_text(
+    data = df_ccf[best_i, ],
+    aes(label = paste0("Best lag: ", best_lag, " weeks\nCorr: ", round(best_corr, 3))),
+    vjust = ifelse(best_corr >= 0, -0.5, 1.5)
+  ) +
+  labs(
+    title = "Does Oil Lead Gas? (Weekly Price Changes)",
+    subtitle = "Bars show correlation between oil changes and gas changes at each lag",
+    x = "Lag (weeks): positive = oil leads gas",
+    y = "Correlation"
+  ) +
+  theme_minimal()
+```
+
+
+```{r}
+lag_weeks <- 3  # replace with your observed lag
+
+ggplot(combined, aes(x = week)) +
+  geom_line(aes(y = gas_z, color = "Gas Price")) +
+  geom_line(aes(y = lag(oil_z, lag_weeks), color = "Oil Price (Lagged)")) +
+  labs(
+    title = "Gas Prices vs Lagged Crude Oil Prices",
+    subtitle = paste("Oil prices shifted forward by", lag_weeks, "weeks"),
+    y = "Standardized Price (Z-score)",
+    color = ""
+  ) +
+  theme_minimal()
+
+
+```
+After removing long-term trends by differencing the series, the cross-correlation of weekly price changes shows no strong or persistent lead–lag relationship. While raw price levels of crude oil and gasoline are highly correlated, weekly changes exhibit only small and inconsistent correlations, with no dominant lag at which oil price changes reliably predict gas price changes. This suggests that price transmission from crude oil markets to retail gasoline prices occurs gradually rather than at a fixed weekly delay, likely reflecting inventory smoothing and market frictions.
+
+```{r}
+ggplot(combined, aes(x = week)) +
+  geom_smooth(aes(y = gas_z, color = "Gas Price"),
+              se = FALSE, linewidth = 1) +
+  geom_smooth(aes(y = dplyr::lag(oil_z, 3),
+                  color = "Oil Price (Lagged 3w)"),
+              se = FALSE, linewidth = 1) +
+  labs(
+    title = "Gas Prices vs Lagged Crude Oil Prices (Smoothed)",
+    subtitle = "Oil prices shifted forward by 3 weeks",
+    y = "Standardized Price (Z-score)",
+    color = ""
+  ) +
+  theme_minimal()
+
+```
+
+
