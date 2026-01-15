@@ -1,22 +1,109 @@
-make_data
-# Section 1: Describe the task
+---
+title: "make_data"
+output: pdf_document
+date: "2026-01-15"
+---
 
+Section 1: Describe the task
+Analyzing U.S. fuel price data to understand how price volatility differs across fuel types and grades over time.I compute rolling volatility (each point is the standard deviation of weekly price changes over the previous 12 weeks) measures to compare how gasoline and diesel prices respond to market shocks across different periods.
 
-# Section 2: What you hope to discover in this task
+Section 2: What you hope to discover in this task
+I want to see if gasoline and deisel prices show different volatility patterns, espeially while facing major historical events, such as the 2008 financial crisis and the post-2020 period.
 
-# Section 3: Code and text to retrieve the data set
-```{r}
-weekly_gas_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-07-01/weekly_gas_prices.csv')
+Section 3: Code
+```{r setup, include=FALSE}
+library(tidyverse)
+library(lubridate)
 ```
 
 ```{r}
-install.packages("ggplot2")
-install.packages("dplyr")
+df <- weekly_gas_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-07-01/weekly_gas_prices.csv')
 ```
 
 ```{r}
-rmarkdown::render("make_data.Rmd")
+weekly_gas_prices %>%
+  distinct(fuel, grade) %>%
+  arrange(fuel, grade)
+
 ```
-# Section 4: Verify dimensions and variables
-# Section 5: Save locally to sub-folder "RData“
-# Section 6: Describe results
+```{r}
+clean_prices <- weekly_gas_prices %>%
+  filter(grade != "all") %>%
+  group_by(date, fuel, grade) %>%
+  summarise(
+    price = mean(price, na.rm = TRUE),
+    .groups = "drop")
+```
+
+```{r}
+ggplot(clean_prices, aes(x = date, y = price, color = grade)) +
+  geom_line(linewidth = 0.8, alpha = 0.9) +
+  facet_wrap(~ fuel, scales = "free_y") +
+    scale_color_manual(
+    values = c(
+      "low_sulfur" = "black",
+      "ultra_low_sulfur" = "lightblue",
+      "regular" = "blue",
+      "midgrade" = "orange",
+      "premium" = "purple")) + 
+  labs(
+    title = "Fuel Price Trends by Grade",
+    subtitle = "Weekly average prices by fuel type and grade",
+    x = NULL,
+    y = "Price ($/gal)",
+    color = "Grade"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    strip.text = element_text(face = "bold")
+  )
+
+```
+
+```{r}
+gas_vol <- vol_data %>%
+  filter(fuel == "gasoline")
+
+p_gas <- ggplot(gas_vol, aes(x = date, y = vol_12w, color = grade)) +
+  geom_line(linewidth = 0.9) +
+  labs(title = "Gasoline Price Volatility by Grade",
+    subtitle = "12-week rolling volatility of weekly price changes",
+    x = NULL, y = "Rolling volatility ($/gal)", color = "Grade") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "top")
+
+p_gas
+
+```
+
+
+```{r}
+diesel_vol <- vol_data %>%
+  filter(fuel == "diesel")
+
+p_diesel <- ggplot(diesel_vol, aes(x = date, y = vol_12w, color = grade)) +
+  geom_line(linewidth = 0.9) +
+  scale_color_manual(
+    values = c("low_sulfur" = "black",
+      "ultra_low_sulfur" = "lightblue"),
+    breaks = c("low_sulfur", "ultra_low_sulfur")) +
+  labs(
+    title = "Diesel Price Volatility by Sulfur Grade",
+    subtitle = "12-week rolling volatility of weekly price changes",
+    x = NULL, y = "Rolling volatility ($/gal)", color = "Grade") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "top")
+
+p_diesel
+
+```
+Section 4: Verify dimensions and variables
+Key variables include:
+date: weekly observation date
+fuel: fuel type (gasoline or diesel)
+grade: gasoline grade or diesel sulfur classification (low_sulfur, ultra_low_sulfur, midgrade, premium, regular)
+price: average weekly price in dollars per gallon
+
+Section 6: Results
+These graphs show price volatility, meaning how unstable prices were over recent weeks. Gasoline shows much bigger volatility spikes during major events like 2008, while diesel stays relatively stable. This suggests gasoline reacts more strongly to shocks, whereas diesel prices are steadier and more inelastic
