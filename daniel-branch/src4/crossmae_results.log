@@ -1,0 +1,279 @@
+/home/azureuser/src4/model_crossmae.py:24: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  return nn.TransformerEncoder(layer, num_layers=depth)
+Device: cuda
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+CrossMAE parameters: 2,166,713
+
+=== Stage A: CrossMAE Pre-training ===
+Epoch 001/050 | Loss 0.5922
+Epoch 002/050 | Loss 0.0855
+Epoch 003/050 | Loss 0.0643
+Epoch 004/050 | Loss 0.0508
+Epoch 005/050 | Loss 0.0510
+Epoch 006/050 | Loss 0.0435
+Epoch 007/050 | Loss 0.0359
+Epoch 008/050 | Loss 0.0392
+Epoch 009/050 | Loss 0.0362
+Epoch 010/050 | Loss 0.0323
+Epoch 011/050 | Loss 0.0337
+Epoch 012/050 | Loss 0.0304
+Epoch 013/050 | Loss 0.0335
+Epoch 014/050 | Loss 0.0291
+Epoch 015/050 | Loss 0.0287
+Epoch 016/050 | Loss 0.0311
+Epoch 017/050 | Loss 0.0272
+Epoch 018/050 | Loss 0.0267
+Epoch 019/050 | Loss 0.0283
+Epoch 020/050 | Loss 0.0254
+Epoch 021/050 | Loss 0.0247
+Epoch 022/050 | Loss 0.0244
+Epoch 023/050 | Loss 0.0237
+Epoch 024/050 | Loss 0.0249
+Epoch 025/050 | Loss 0.0227
+Epoch 026/050 | Loss 0.0233
+Epoch 027/050 | Loss 0.0222
+Epoch 028/050 | Loss 0.0218
+Epoch 029/050 | Loss 0.0226
+Epoch 030/050 | Loss 0.0214
+Epoch 031/050 | Loss 0.0211
+Epoch 032/050 | Loss 0.0207
+Epoch 033/050 | Loss 0.0205
+Epoch 034/050 | Loss 0.0203
+Epoch 035/050 | Loss 0.0201
+Epoch 036/050 | Loss 0.0202
+Epoch 037/050 | Loss 0.0198
+Epoch 038/050 | Loss 0.0196
+Epoch 039/050 | Loss 0.0195
+Epoch 040/050 | Loss 0.0194
+Epoch 041/050 | Loss 0.0193
+Epoch 042/050 | Loss 0.0191
+Epoch 043/050 | Loss 0.0191
+Epoch 044/050 | Loss 0.0190
+Epoch 045/050 | Loss 0.0189
+Epoch 046/050 | Loss 0.0189
+Epoch 047/050 | Loss 0.0188
+Epoch 048/050 | Loss 0.0188
+Epoch 049/050 | Loss 0.0188
+Epoch 050/050 | Loss 0.0188
+Pre-training done. Best loss: 0.0188
+Saved → /home/azureuser/src4/outputs_crossmae/pretrained.pt
+
+=== Stage B: Fine-tuning [frozen] ===
+Epoch 001/100 | [frozen] Val BitAcc 0.8968  ExactMatch 0.4759
+Epoch 002/100 | [frozen] Val BitAcc 0.9069  ExactMatch 0.5469
+Epoch 003/100 | [frozen] Val BitAcc 0.9077  ExactMatch 0.5473
+Epoch 004/100 | [frozen] Val BitAcc 0.9088  ExactMatch 0.5224
+Epoch 005/100 | [frozen] Val BitAcc 0.9152  ExactMatch 0.5389
+Epoch 006/100 | [frozen] Val BitAcc 0.9104  ExactMatch 0.5306
+Epoch 007/100 | [frozen] Val BitAcc 0.9141  ExactMatch 0.5434
+Epoch 008/100 | [frozen] Val BitAcc 0.9220  ExactMatch 0.5732
+Epoch 009/100 | [frozen] Val BitAcc 0.9193  ExactMatch 0.5455
+Epoch 010/100 | [frozen] Val BitAcc 0.9142  ExactMatch 0.5384
+Epoch 011/100 | [frozen] Val BitAcc 0.9134  ExactMatch 0.5270
+Epoch 012/100 | [frozen] Val BitAcc 0.9171  ExactMatch 0.5392
+Epoch 013/100 | [frozen] Val BitAcc 0.9185  ExactMatch 0.5287
+Epoch 014/100 | [frozen] Val BitAcc 0.9156  ExactMatch 0.5299
+Epoch 015/100 | [frozen] Val BitAcc 0.9183  ExactMatch 0.5485
+Epoch 016/100 | [frozen] Val BitAcc 0.9224  ExactMatch 0.5455
+Epoch 017/100 | [frozen] Val BitAcc 0.9182  ExactMatch 0.5456
+Epoch 018/100 | [frozen] Val BitAcc 0.9158  ExactMatch 0.5338
+Epoch 019/100 | [frozen] Val BitAcc 0.9150  ExactMatch 0.5465
+Epoch 020/100 | [frozen] Val BitAcc 0.9204  ExactMatch 0.5393
+Epoch 021/100 | [frozen] Val BitAcc 0.9197  ExactMatch 0.5302
+Epoch 022/100 | [frozen] Val BitAcc 0.9191  ExactMatch 0.5396
+Epoch 023/100 | [frozen] Val BitAcc 0.9216  ExactMatch 0.5559
+Epoch 024/100 | [frozen] Val BitAcc 0.9161  ExactMatch 0.5361
+Epoch 025/100 | [frozen] Val BitAcc 0.9253  ExactMatch 0.5453
+Epoch 026/100 | [frozen] Val BitAcc 0.9204  ExactMatch 0.5251
+Epoch 027/100 | [frozen] Val BitAcc 0.9120  ExactMatch 0.5353
+Epoch 028/100 | [frozen] Val BitAcc 0.9179  ExactMatch 0.5371
+Epoch 029/100 | [frozen] Val BitAcc 0.9182  ExactMatch 0.5136
+Epoch 030/100 | [frozen] Val BitAcc 0.9236  ExactMatch 0.5566
+Epoch 031/100 | [frozen] Val BitAcc 0.9211  ExactMatch 0.5522
+Epoch 032/100 | [frozen] Val BitAcc 0.9253  ExactMatch 0.5535
+Epoch 033/100 | [frozen] Val BitAcc 0.9264  ExactMatch 0.5793
+Epoch 034/100 | [frozen] Val BitAcc 0.9250  ExactMatch 0.5582
+Epoch 035/100 | [frozen] Val BitAcc 0.9209  ExactMatch 0.5458
+Epoch 036/100 | [frozen] Val BitAcc 0.9241  ExactMatch 0.5484
+Epoch 037/100 | [frozen] Val BitAcc 0.9194  ExactMatch 0.5724
+Epoch 038/100 | [frozen] Val BitAcc 0.9254  ExactMatch 0.5836
+Epoch 039/100 | [frozen] Val BitAcc 0.9240  ExactMatch 0.5528
+Epoch 040/100 | [frozen] Val BitAcc 0.9241  ExactMatch 0.5410
+Epoch 041/100 | [frozen] Val BitAcc 0.9223  ExactMatch 0.5592
+Epoch 042/100 | [frozen] Val BitAcc 0.9229  ExactMatch 0.5504
+Epoch 043/100 | [frozen] Val BitAcc 0.9218  ExactMatch 0.5613
+Epoch 044/100 | [frozen] Val BitAcc 0.9237  ExactMatch 0.5663
+Epoch 045/100 | [frozen] Val BitAcc 0.9230  ExactMatch 0.5559
+Epoch 046/100 | [frozen] Val BitAcc 0.9269  ExactMatch 0.5421
+Epoch 047/100 | [frozen] Val BitAcc 0.9189  ExactMatch 0.5521
+Epoch 048/100 | [frozen] Val BitAcc 0.9205  ExactMatch 0.5323
+Epoch 049/100 | [frozen] Val BitAcc 0.9269  ExactMatch 0.5631
+Epoch 050/100 | [frozen] Val BitAcc 0.9276  ExactMatch 0.5624
+Epoch 051/100 | [frozen] Val BitAcc 0.9286  ExactMatch 0.5632
+Epoch 052/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5550
+Epoch 053/100 | [frozen] Val BitAcc 0.9201  ExactMatch 0.5551
+Epoch 054/100 | [frozen] Val BitAcc 0.9267  ExactMatch 0.5562
+Epoch 055/100 | [frozen] Val BitAcc 0.9222  ExactMatch 0.5533
+Epoch 056/100 | [frozen] Val BitAcc 0.9234  ExactMatch 0.5474
+Epoch 057/100 | [frozen] Val BitAcc 0.9166  ExactMatch 0.5347
+Epoch 058/100 | [frozen] Val BitAcc 0.9187  ExactMatch 0.5377
+Epoch 059/100 | [frozen] Val BitAcc 0.9253  ExactMatch 0.5630
+Epoch 060/100 | [frozen] Val BitAcc 0.9280  ExactMatch 0.5615
+Epoch 061/100 | [frozen] Val BitAcc 0.9245  ExactMatch 0.5668
+Epoch 062/100 | [frozen] Val BitAcc 0.9243  ExactMatch 0.5619
+Epoch 063/100 | [frozen] Val BitAcc 0.9243  ExactMatch 0.5616
+Epoch 064/100 | [frozen] Val BitAcc 0.9197  ExactMatch 0.5461
+Epoch 065/100 | [frozen] Val BitAcc 0.9255  ExactMatch 0.5515
+Epoch 066/100 | [frozen] Val BitAcc 0.9255  ExactMatch 0.5541
+Epoch 067/100 | [frozen] Val BitAcc 0.9224  ExactMatch 0.5563
+Epoch 068/100 | [frozen] Val BitAcc 0.9250  ExactMatch 0.5550
+Epoch 069/100 | [frozen] Val BitAcc 0.9253  ExactMatch 0.5601
+Epoch 070/100 | [frozen] Val BitAcc 0.9217  ExactMatch 0.5521
+Epoch 071/100 | [frozen] Val BitAcc 0.9253  ExactMatch 0.5598
+Epoch 072/100 | [frozen] Val BitAcc 0.9255  ExactMatch 0.5576
+Epoch 073/100 | [frozen] Val BitAcc 0.9249  ExactMatch 0.5531
+Epoch 074/100 | [frozen] Val BitAcc 0.9250  ExactMatch 0.5539
+Epoch 075/100 | [frozen] Val BitAcc 0.9242  ExactMatch 0.5574
+Epoch 076/100 | [frozen] Val BitAcc 0.9222  ExactMatch 0.5506
+Epoch 077/100 | [frozen] Val BitAcc 0.9255  ExactMatch 0.5574
+Epoch 078/100 | [frozen] Val BitAcc 0.9249  ExactMatch 0.5570
+Epoch 079/100 | [frozen] Val BitAcc 0.9258  ExactMatch 0.5597
+Epoch 080/100 | [frozen] Val BitAcc 0.9258  ExactMatch 0.5583
+Epoch 081/100 | [frozen] Val BitAcc 0.9231  ExactMatch 0.5606
+Epoch 082/100 | [frozen] Val BitAcc 0.9242  ExactMatch 0.5599
+Epoch 083/100 | [frozen] Val BitAcc 0.9239  ExactMatch 0.5564
+Epoch 084/100 | [frozen] Val BitAcc 0.9245  ExactMatch 0.5544
+Epoch 085/100 | [frozen] Val BitAcc 0.9249  ExactMatch 0.5569
+Epoch 086/100 | [frozen] Val BitAcc 0.9201  ExactMatch 0.5484
+Epoch 087/100 | [frozen] Val BitAcc 0.9245  ExactMatch 0.5579
+Epoch 088/100 | [frozen] Val BitAcc 0.9232  ExactMatch 0.5549
+Epoch 089/100 | [frozen] Val BitAcc 0.9240  ExactMatch 0.5561
+Epoch 090/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5563
+Epoch 091/100 | [frozen] Val BitAcc 0.9248  ExactMatch 0.5568
+Epoch 092/100 | [frozen] Val BitAcc 0.9249  ExactMatch 0.5572
+Epoch 093/100 | [frozen] Val BitAcc 0.9247  ExactMatch 0.5563
+Epoch 094/100 | [frozen] Val BitAcc 0.9247  ExactMatch 0.5568
+Epoch 095/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5566
+Epoch 096/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5567
+Epoch 097/100 | [frozen] Val BitAcc 0.9245  ExactMatch 0.5566
+Epoch 098/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5566
+Epoch 099/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5566
+Epoch 100/100 | [frozen] Val BitAcc 0.9246  ExactMatch 0.5566
+
+  [frozen] TEST | BitAcc=0.9327  ExactMatch=0.6221  TxMAE=0.1667ms  LenMAE=157.8B
+
+=== Stage B: Fine-tuning [full] ===
+Epoch 001/100 | [full] Val BitAcc 0.9268  ExactMatch 0.5811
+Epoch 002/100 | [full] Val BitAcc 0.9265  ExactMatch 0.5889
+Epoch 003/100 | [full] Val BitAcc 0.9280  ExactMatch 0.5972
+Epoch 004/100 | [full] Val BitAcc 0.9350  ExactMatch 0.6002
+Epoch 005/100 | [full] Val BitAcc 0.9351  ExactMatch 0.6069
+Epoch 006/100 | [full] Val BitAcc 0.9299  ExactMatch 0.6002
+Epoch 007/100 | [full] Val BitAcc 0.9285  ExactMatch 0.6172
+Epoch 008/100 | [full] Val BitAcc 0.9394  ExactMatch 0.6403
+Epoch 009/100 | [full] Val BitAcc 0.9453  ExactMatch 0.6903
+Epoch 010/100 | [full] Val BitAcc 0.9459  ExactMatch 0.6230
+Epoch 011/100 | [full] Val BitAcc 0.9470  ExactMatch 0.6173
+Epoch 012/100 | [full] Val BitAcc 0.9522  ExactMatch 0.6368
+Epoch 013/100 | [full] Val BitAcc 0.9504  ExactMatch 0.6522
+Epoch 014/100 | [full] Val BitAcc 0.9511  ExactMatch 0.6800
+Epoch 015/100 | [full] Val BitAcc 0.9617  ExactMatch 0.6662
+Epoch 016/100 | [full] Val BitAcc 0.9668  ExactMatch 0.6750
+Epoch 017/100 | [full] Val BitAcc 0.9717  ExactMatch 0.7356
+Epoch 018/100 | [full] Val BitAcc 0.9706  ExactMatch 0.7158
+Epoch 019/100 | [full] Val BitAcc 0.9757  ExactMatch 0.7744
+Epoch 020/100 | [full] Val BitAcc 0.9746  ExactMatch 0.7775
+Epoch 021/100 | [full] Val BitAcc 0.9776  ExactMatch 0.8192
+Epoch 022/100 | [full] Val BitAcc 0.9795  ExactMatch 0.8146
+Epoch 023/100 | [full] Val BitAcc 0.9781  ExactMatch 0.8116
+Epoch 024/100 | [full] Val BitAcc 0.9823  ExactMatch 0.8497
+Epoch 025/100 | [full] Val BitAcc 0.9773  ExactMatch 0.8346
+Epoch 026/100 | [full] Val BitAcc 0.9844  ExactMatch 0.8768
+Epoch 027/100 | [full] Val BitAcc 0.9807  ExactMatch 0.8474
+Epoch 028/100 | [full] Val BitAcc 0.9821  ExactMatch 0.8612
+Epoch 029/100 | [full] Val BitAcc 0.9823  ExactMatch 0.8609
+Epoch 030/100 | [full] Val BitAcc 0.9831  ExactMatch 0.8585
+Epoch 031/100 | [full] Val BitAcc 0.9822  ExactMatch 0.8667
+Epoch 032/100 | [full] Val BitAcc 0.9833  ExactMatch 0.8760
+Epoch 033/100 | [full] Val BitAcc 0.9831  ExactMatch 0.8722
+Epoch 034/100 | [full] Val BitAcc 0.9854  ExactMatch 0.8846
+Epoch 035/100 | [full] Val BitAcc 0.9852  ExactMatch 0.8936
+Epoch 036/100 | [full] Val BitAcc 0.9859  ExactMatch 0.8952
+Epoch 037/100 | [full] Val BitAcc 0.9855  ExactMatch 0.8957
+Epoch 038/100 | [full] Val BitAcc 0.9858  ExactMatch 0.9036
+Epoch 039/100 | [full] Val BitAcc 0.9854  ExactMatch 0.9023
+Epoch 040/100 | [full] Val BitAcc 0.9851  ExactMatch 0.9034
+Epoch 041/100 | [full] Val BitAcc 0.9878  ExactMatch 0.9190
+Epoch 042/100 | [full] Val BitAcc 0.9872  ExactMatch 0.9130
+Epoch 043/100 | [full] Val BitAcc 0.9856  ExactMatch 0.8921
+Epoch 044/100 | [full] Val BitAcc 0.9876  ExactMatch 0.9200
+Epoch 045/100 | [full] Val BitAcc 0.9862  ExactMatch 0.9010
+Epoch 046/100 | [full] Val BitAcc 0.9870  ExactMatch 0.9053
+Epoch 047/100 | [full] Val BitAcc 0.9870  ExactMatch 0.9174
+Epoch 048/100 | [full] Val BitAcc 0.9865  ExactMatch 0.9146
+Epoch 049/100 | [full] Val BitAcc 0.9881  ExactMatch 0.9231
+Epoch 050/100 | [full] Val BitAcc 0.9856  ExactMatch 0.9016
+Epoch 051/100 | [full] Val BitAcc 0.9868  ExactMatch 0.9059
+Epoch 052/100 | [full] Val BitAcc 0.9875  ExactMatch 0.9204
+Epoch 053/100 | [full] Val BitAcc 0.9876  ExactMatch 0.9166
+Epoch 054/100 | [full] Val BitAcc 0.9887  ExactMatch 0.9322
+Epoch 055/100 | [full] Val BitAcc 0.9887  ExactMatch 0.9287
+Epoch 056/100 | [full] Val BitAcc 0.9887  ExactMatch 0.9268
+Epoch 057/100 | [full] Val BitAcc 0.9886  ExactMatch 0.9284
+Epoch 058/100 | [full] Val BitAcc 0.9888  ExactMatch 0.9320
+Epoch 059/100 | [full] Val BitAcc 0.9888  ExactMatch 0.9335
+Epoch 060/100 | [full] Val BitAcc 0.9885  ExactMatch 0.9302
+Epoch 061/100 | [full] Val BitAcc 0.9890  ExactMatch 0.9334
+Epoch 062/100 | [full] Val BitAcc 0.9892  ExactMatch 0.9327
+Epoch 063/100 | [full] Val BitAcc 0.9886  ExactMatch 0.9283
+Epoch 064/100 | [full] Val BitAcc 0.9894  ExactMatch 0.9356
+Epoch 065/100 | [full] Val BitAcc 0.9894  ExactMatch 0.9356
+Epoch 066/100 | [full] Val BitAcc 0.9892  ExactMatch 0.9365
+Epoch 067/100 | [full] Val BitAcc 0.9896  ExactMatch 0.9382
+Epoch 068/100 | [full] Val BitAcc 0.9886  ExactMatch 0.9285
+Epoch 069/100 | [full] Val BitAcc 0.9894  ExactMatch 0.9356
+Epoch 070/100 | [full] Val BitAcc 0.9896  ExactMatch 0.9357
+Epoch 071/100 | [full] Val BitAcc 0.9898  ExactMatch 0.9386
+Epoch 072/100 | [full] Val BitAcc 0.9891  ExactMatch 0.9351
+Epoch 073/100 | [full] Val BitAcc 0.9896  ExactMatch 0.9378
+Epoch 074/100 | [full] Val BitAcc 0.9896  ExactMatch 0.9390
+Epoch 075/100 | [full] Val BitAcc 0.9895  ExactMatch 0.9364
+Epoch 076/100 | [full] Val BitAcc 0.9890  ExactMatch 0.9324
+Epoch 077/100 | [full] Val BitAcc 0.9895  ExactMatch 0.9381
+Epoch 078/100 | [full] Val BitAcc 0.9897  ExactMatch 0.9373
+Epoch 079/100 | [full] Val BitAcc 0.9899  ExactMatch 0.9391
+Epoch 080/100 | [full] Val BitAcc 0.9898  ExactMatch 0.9377
+Epoch 081/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9398
+Epoch 082/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9406
+Epoch 083/100 | [full] Val BitAcc 0.9898  ExactMatch 0.9380
+Epoch 084/100 | [full] Val BitAcc 0.9897  ExactMatch 0.9386
+Epoch 085/100 | [full] Val BitAcc 0.9903  ExactMatch 0.9403
+Epoch 086/100 | [full] Val BitAcc 0.9900  ExactMatch 0.9393
+Epoch 087/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9400
+Epoch 088/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9395
+Epoch 089/100 | [full] Val BitAcc 0.9899  ExactMatch 0.9393
+Epoch 090/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9405
+Epoch 091/100 | [full] Val BitAcc 0.9900  ExactMatch 0.9398
+Epoch 092/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9400
+Epoch 093/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9402
+Epoch 094/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9401
+Epoch 095/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9397
+Epoch 096/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9397
+Epoch 097/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9401
+Epoch 098/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9400
+Epoch 099/100 | [full] Val BitAcc 0.9901  ExactMatch 0.9402
+Epoch 100/100 | [full] Val BitAcc 0.9902  ExactMatch 0.9402
+
+  [full] TEST | BitAcc=0.9880  ExactMatch=0.9337  TxMAE=0.0114ms  LenMAE=20.9B
+
+================================================
+RESULTS SUMMARY
+================================================
+Model                | ExactMatch | TxMAE(ms)
+DeepMon baseline     |    0.657   |   0.077
+CrossMAE frozen      |  0.622     |  0.167
+CrossMAE full        |  0.934     |  0.011
+================================================

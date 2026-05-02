@@ -1,0 +1,297 @@
+Device: cuda
+Output: /home/azureuser/src4/outputs_fewshot
+
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+Full training samples: 61104
+
+============================================================
+Fraction 0.01  (611 samples)
+============================================================
+  [DeepMon] fraction=0.01 (611 samples)
+Discovering records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+/home/azureuser/src3/dataset.py:73: RuntimeWarning: Mean of empty slice
+  wave = wave - wave.mean()
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 412, in main
+    ba, ex, tx, lm = finetune_rismae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 213, in finetune_rismae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 419, in main
+    ba, ex, tx, lm = finetune_crossmae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 104, in finetune_crossmae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+    → ExactMatch=0.3336 BitAcc=0.8406 TxMAE=0.0093ms
+  [RIS-MAE] fraction=0.01 (611 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+  [CrossMAE] fraction=0.01 (611 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+
+============================================================
+Fraction 0.05  (3,055 samples)
+============================================================
+  [DeepMon] fraction=0.05 (3,055 samples)
+Discovering records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+/home/azureuser/src3/dataset.py:73: RuntimeWarning: Mean of empty slice
+  wave = wave - wave.mean()
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 412, in main
+    ba, ex, tx, lm = finetune_rismae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 213, in finetune_rismae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 419, in main
+    ba, ex, tx, lm = finetune_crossmae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 104, in finetune_crossmae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+    → ExactMatch=0.0000 BitAcc=0.7890 TxMAE=0.3222ms
+  [RIS-MAE] fraction=0.05 (3,055 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+  [CrossMAE] fraction=0.05 (3,055 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+
+============================================================
+Fraction 0.10  (6,110 samples)
+============================================================
+  [DeepMon] fraction=0.10 (6,110 samples)
+Discovering records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+/home/azureuser/src3/dataset.py:73: RuntimeWarning: Mean of empty slice
+  wave = wave - wave.mean()
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 412, in main
+    ba, ex, tx, lm = finetune_rismae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 213, in finetune_rismae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 419, in main
+    ba, ex, tx, lm = finetune_crossmae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 104, in finetune_crossmae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+    → ExactMatch=0.0000 BitAcc=0.6618 TxMAE=0.5793ms
+  [RIS-MAE] fraction=0.10 (6,110 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+  [CrossMAE] fraction=0.10 (6,110 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+
+============================================================
+Fraction 0.25  (15,276 samples)
+============================================================
+  [DeepMon] fraction=0.25 (15,276 samples)
+Discovering records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+/home/azureuser/src3/dataset.py:73: RuntimeWarning: Mean of empty slice
+  wave = wave - wave.mean()
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 412, in main
+    ba, ex, tx, lm = finetune_rismae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 213, in finetune_rismae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 419, in main
+    ba, ex, tx, lm = finetune_crossmae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 104, in finetune_crossmae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+    → ExactMatch=0.0000 BitAcc=0.3906 TxMAE=2.6183ms
+  [RIS-MAE] fraction=0.25 (15,276 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+  [CrossMAE] fraction=0.25 (15,276 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+
+============================================================
+Fraction 1.00  (61,104 samples)
+============================================================
+  [DeepMon] fraction=1.00 (61,104 samples)
+Discovering records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+/home/azureuser/src3/dataset.py:73: RuntimeWarning: Mean of empty slice
+  wave = wave - wave.mean()
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/wireless_env/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 412, in main
+    ba, ex, tx, lm = finetune_rismae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 213, in finetune_rismae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/azureuser/src4/train_fewshot.py", line 419, in main
+    ba, ex, tx, lm = finetune_crossmae(frac, train_subset_idx, cfg, epochs_to_use)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 104, in finetune_crossmae
+    pos_weight = compute_pos_weight_from_subset(train_recs, train_subset_idx)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/src4/train_fewshot.py", line 78, in compute_pos_weight_from_subset
+    all_bits.append(train_recs[idx]["y"])
+                    ~~~~~~~~~~~~~~~^^^^^
+TypeError: 'CrossPacketRecord' object is not subscriptable
+    → ExactMatch=0.0000 BitAcc=0.2349 TxMAE=nanms
+  [RIS-MAE] fraction=1.00 (61,104 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+  [CrossMAE] fraction=1.00 (61,104 samples)
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+    ERROR: 'CrossPacketRecord' object is not subscriptable
+
+======================================================================
+FEW-SHOT RESULTS — ExactMatch on Test Set
+======================================================================
+   Labeled      DeepMon      RIS-MAE     CrossMAE
+   samples    (scratch)    (full ft)    (full ft)
+----------------------------------------------------------------------
+       611       0.3336          N/A          N/A
+     3,055       0.0000          N/A          N/A
+     6,110       0.0000          N/A          N/A
+    15,276       0.0000          N/A          N/A
+    61,104       0.0000          N/A          N/A
+----------------------------------------------------------------------
+ DeepMon full-data baseline (paper): 0.6570
+======================================================================
+
+Results saved to: /home/azureuser/src4/outputs_fewshot/results.json

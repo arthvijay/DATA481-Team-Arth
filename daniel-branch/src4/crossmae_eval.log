@@ -1,0 +1,196 @@
+/home/azureuser/src4/model_crossmae.py:24: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  return nn.TransformerEncoder(layer, num_layers=depth)
+Device: cuda
+Loading datasets...
+Discovering cross-modal records...
+Train (before split): 71888
+Test:                 7359
+Train: 61104, Val: 10784, Test: 7359
+
+=================================================================
+L-SIG Decoding — CrossMAE [frozen]  (overfitting check)
+=================================================================
+  [train       ]  BitAcc=0.9260  ExactMatch=0.5843  TxMAE=0.1961ms  LenMAE=183.2B
+  [val         ]  BitAcc=0.9254  ExactMatch=0.5836  TxMAE=0.1955ms  LenMAE=180.6B
+/home/azureuser/src4/dataset_crossmae.py:72: RuntimeWarning: Mean of empty slice
+  wave = (wave - wave.mean()) / (wave.std() + 1e-8)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+  [test        ]  BitAcc=0.9327  ExactMatch=0.6221  TxMAE=0.1667ms  LenMAE=157.8B
+
+  Gap (train-test) ExactMatch : -0.0377
+  Gap (val-test)   ExactMatch : -0.0385
+
+  Per-bit accuracy on TEST [frozen]:
+    bit[00] Rate: 0.9170  ██████████████████
+    bit[01] Rate: 0.9694  ███████████████████
+    bit[02] Rate: 0.9880  ███████████████████
+    bit[03] Rate: 0.9870  ███████████████████
+    bit[04] Rsvd: 0.9893  ███████████████████
+    bit[05] Len : 0.8713  █████████████████
+    bit[06] Len : 0.8471  ████████████████
+    bit[07] Len : 0.8713  █████████████████
+    bit[08] Len : 0.8811  █████████████████
+    bit[09] Len : 0.8240  ████████████████
+    bit[10] Len : 0.8791  █████████████████
+    bit[11] Len : 0.8791  █████████████████
+    bit[12] Len : 0.9004  ██████████████████
+    bit[13] Len : 0.9656  ███████████████████
+    bit[14] Len : 0.8447  ████████████████
+    bit[15] Len : 0.9758  ███████████████████
+    bit[16] Len : 0.9898  ███████████████████
+    bit[17] Par : 0.8831  █████████████████
+    bit[18] Tail: 0.9904  ███████████████████
+    bit[19] Tail: 0.9899  ███████████████████
+    bit[20] Tail: 0.9905  ███████████████████
+    bit[21] Tail: 0.9898  ███████████████████
+    bit[22] Tail: 0.9777  ███████████████████
+    bit[23] Tail: 0.9838  ███████████████████
+
+=================================================================
+L-SIG Decoding — CrossMAE [full]  (overfitting check)
+=================================================================
+  [train       ]  BitAcc=0.9907  ExactMatch=0.9427  TxMAE=0.0157ms  LenMAE=21.7B
+  [val         ]  BitAcc=0.9901  ExactMatch=0.9405  TxMAE=0.0163ms  LenMAE=24.2B
+/home/azureuser/src4/dataset_crossmae.py:72: RuntimeWarning: Mean of empty slice
+  wave = (wave - wave.mean()) / (wave.std() + 1e-8)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+  [test        ]  BitAcc=0.9880  ExactMatch=0.9337  TxMAE=0.0114ms  LenMAE=20.9B
+
+  Gap (train-test) ExactMatch : +0.0090
+  Gap (val-test)   ExactMatch : +0.0068
+
+  Per-bit accuracy on TEST [full]:
+    bit[00] Rate: 0.9887  ███████████████████
+    bit[01] Rate: 0.9853  ███████████████████
+    bit[02] Rate: 0.9981  ███████████████████
+    bit[03] Rate: 0.9971  ███████████████████
+    bit[04] Rsvd: 0.9982  ███████████████████
+    bit[05] Len : 0.9948  ███████████████████
+    bit[06] Len : 0.9678  ███████████████████
+    bit[07] Len : 0.9663  ███████████████████
+    bit[08] Len : 0.9687  ███████████████████
+    bit[09] Len : 0.9807  ███████████████████
+    bit[10] Len : 0.9692  ███████████████████
+    bit[11] Len : 0.9830  ███████████████████
+    bit[12] Len : 0.9868  ███████████████████
+    bit[13] Len : 0.9870  ███████████████████
+    bit[14] Len : 0.9865  ███████████████████
+    bit[15] Len : 0.9971  ███████████████████
+    bit[16] Len : 0.9974  ███████████████████
+    bit[17] Par : 0.9768  ███████████████████
+    bit[18] Tail: 0.9974  ███████████████████
+    bit[19] Tail: 0.9973  ███████████████████
+    bit[20] Tail: 0.9978  ███████████████████
+    bit[21] Tail: 0.9978  ███████████████████
+    bit[22] Tail: 0.9961  ███████████████████
+    bit[23] Tail: 0.9963  ███████████████████
+
+=================================================================
+L-SIG DECODING — FULL COMPARISON
+=================================================================
+Model                      Split    BitAcc   ExMatch   TxMAE(ms)   LenMAE(B)
+-----------------------------------------------------------------
+/home/azureuser/src4/dataset_crossmae.py:72: RuntimeWarning: Mean of empty slice
+  wave = (wave - wave.mean()) / (wave.std() + 1e-8)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+  CrossMAE [frozen]        train    0.9260    0.5851      0.1969       183.8
+  CrossMAE [frozen]        val      0.9254    0.5836      0.1955       180.6
+  CrossMAE [frozen]        test     0.9327    0.6221      0.1667       157.8
+
+/home/azureuser/src4/dataset_crossmae.py:72: RuntimeWarning: Mean of empty slice
+  wave = (wave - wave.mean()) / (wave.std() + 1e-8)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+  CrossMAE [full]          train    0.9908    0.9427      0.0156        21.5
+  CrossMAE [full]          val      0.9901    0.9405      0.0163        24.2
+  CrossMAE [full]          test     0.9880    0.9337      0.0114        20.9
+
+  DeepMon baseline         test     0.9768     0.657      0.0770           ~
+=================================================================
+
+============================================================
+Protocol Classification  (CrossMAE encoder backbone)
+============================================================
+
+Discovering all-protocol records...
+  Train: HT=7,041  Non-HT=71,888  VHT=3,685
+  Test: HT=1,040  Non-HT=7,359  VHT=186
+
+Phase 1: frozen encoder (50 epochs)
+  Epoch 001/50 | Val Acc 0.9263
+  Epoch 010/50 | Val Acc 0.9492
+  Epoch 020/50 | Val Acc 0.9530
+  Epoch 030/50 | Val Acc 0.9603
+  Epoch 040/50 | Val Acc 0.9601
+  Epoch 050/50 | Val Acc 0.9619
+
+Phase 2: full fine-tune (50 epochs)
+  Epoch 001/50 | Val Acc 0.9892
+  Epoch 010/50 | Val Acc 0.9969
+  Epoch 020/50 | Val Acc 0.9978
+  Epoch 030/50 | Val Acc 0.9982
+  Epoch 040/50 | Val Acc 0.9981
+  Epoch 050/50 | Val Acc 0.9983
+/home/azureuser/src4/dataset_crossmae.py:72: RuntimeWarning: Mean of empty slice
+  wave = (wave - wave.mean()) / (wave.std() + 1e-8)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/azureuser/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in divide
+  ret = ret.dtype.type(ret / rcount)
+
+  Test Accuracy : 0.9911
+  (DeepMon @ 5MHz: 99.17%  |  Paper @ 3MHz: N/A)
+
+              precision    recall  f1-score   support
+
+      Non-HT     0.9938    0.9961    0.9949      7359
+          HT     0.9746    0.9606    0.9676      1040
+         VHT     0.9783    0.9677    0.9730       186
+
+    accuracy                         0.9911      8585
+   macro avg     0.9822    0.9748    0.9785      8585
+weighted avg     0.9911    0.9911    0.9911      8585
+
+Confusion matrix (rows=actual, cols=predicted):
+              Non-HT        HT       VHT
+    Non-HT      7330        25         4
+        HT        41       999         0
+       VHT         5         1       180
+
+=================================================================
+PROTOCOL CLASSIFICATION — COMPARISON
+=================================================================
+  CrossMAE encoder backbone : 0.9911 (99.11%)
+  DeepMon (FFT input)       : 0.9917 (99.17%)
+=================================================================
