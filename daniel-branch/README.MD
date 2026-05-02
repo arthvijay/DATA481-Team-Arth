@@ -1,18 +1,48 @@
-HI THIS IS DANIEL BRANCH
+📡 WiFi Low-Sampling Signal Decoding — Daniel Branch
 
-"Imagine you have a cheap Wi-Fi receiver — one that only samples the signal at 5 MHz instead of the full 20
-or 80 MHz, which modern 802.11 standards use. Can you still decode the packet header accurately enough to
-be useful? That is the core question of this project."
-"Every Wi-Fi packet begins with a 24-bit header called the L-SIG field. It tells the receiver two critical things:
-how fast the data is being transmitted, and how long the packet is. If you get these wrong, you cannot
-correctly receive or schedule anything. Our goal is to decode this 24-bit field from a severely undersampled
-IQ signal captured at only 5 MHz."
+“Imagine you have a cheap Wi-Fi receiver — one that only samples signals at 5 MHz instead of the full 20 or 80 MHz used in modern 802.11 standards. Can you still decode packet information accurately enough to be useful?”
 
-MODEL 1 — 1D CNN Baseline (src/)
-/KNOWLEDGE DISTILLATION — Teacher → Student (zkd/)
-/MODEL 2 — DeepMon with ReLU (src2/) — Paper Reimplementation
-/MODEL 3 — DeepMon with SiLU (src3/) — The Refined Baseline
-/MODEL 4 — RIS-MAE (src3/) — Single-Modal Masked Autoencoder
-/MODEL 5 — CrossMAE (src4/) — Cross-Modal MAE — Main Contribution
-/FEW-SHOT EXPERIMENTS (src4/) — Label Efficiency
-/STRUCTURED DECODE (src4/) — Free Domain Knowledge Post-Processing
+This project investigates whether critical WiFi packet information can be recovered from severely undersampled IQ signals.
+
+🧠 Problem Overview
+
+Every WiFi packet begins with a 24-bit header (L-SIG field) that encodes:
+
+Transmission data rate
+Packet length
+
+Accurate decoding of this field is essential — without it, a receiver cannot correctly interpret or schedule communication.
+
+👉 Goal:
+Decode the 24-bit L-SIG field from low-resolution (5 MHz) IQ signals, where much of the original signal information is lost.
+
+🏗️ Model & Experiment Structure
+🔹 Model 1 — 1D CNN Baseline (src/)
+Initial sanity-check model
+Directly operates on raw IQ signals
+🔹 Knowledge Distillation (zkd/)
+Teacher model trained on high-resolution signals
+Student model learns from low-resolution inputs
+Tests whether missing information can be transferred
+🔹 Model 2 — DeepMon (ReLU) (src2/)
+Reimplementation of DeepMon architecture
+Serves as paper baseline reproduction
+🔹 Model 3 — DeepMon (SiLU) (src3/)
+Activation upgraded from ReLU → SiLU
+More stable training and improved representation
+Acts as refined baseline
+🔹 Model 4 — RIS-MAE (src3/)
+Single-modal masked autoencoder
+Learns latent structure from corrupted signal
+Focus: representation learning under information loss
+🔹 Model 5 — CrossMAE (src4/) ⭐ Main Contribution
+Cross-modal masked autoencoder
+Leverages relationships between different signal views
+Designed to improve robustness under low sampling conditions
+🧪 Additional Experiments (src4/)
+▪️ Few-Shot Learning
+Evaluates label efficiency
+Measures performance with limited supervision
+▪️ Structured Decode
+Post-processing using domain knowledge
+Improves prediction consistency without changing the model
