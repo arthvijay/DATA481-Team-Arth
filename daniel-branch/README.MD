@@ -9,10 +9,10 @@ correctly receive or schedule anything. Our goal is to decode this 24-bit field 
 IQ signal captured at only 5 MHz."
 
 MODEL 1 — 1D CNN Baseline (src/)
-KNOWLEDGE DISTILLATION — Teacher → Student (zkd/)
-MODEL 2 — DeepMon with ReLU (src2/) — Paper Reimplementation
-MODEL 3 — DeepMon with SiLU (src3/) — The Refined Baseline
-MODEL 4 — RIS-MAE (src3/) — Single-Modal Masked Autoencoder
-MODEL 5 — CrossMAE (src4/) — Cross-Modal MAE — Main Contribution
-FEW-SHOT EXPERIMENTS (src4/) — Label Efficiency
-STRUCTURED DECODE (src4/) — Free Domain Knowledge Post-Processing
+/KNOWLEDGE DISTILLATION — Teacher → Student (zkd/)
+/MODEL 2 — DeepMon with ReLU (src2/) — Paper Reimplementation
+/MODEL 3 — DeepMon with SiLU (src3/) — The Refined Baseline
+/MODEL 4 — RIS-MAE (src3/) — Single-Modal Masked Autoencoder
+/MODEL 5 — CrossMAE (src4/) — Cross-Modal MAE — Main Contribution
+/FEW-SHOT EXPERIMENTS (src4/) — Label Efficiency
+/STRUCTURED DECODE (src4/) — Free Domain Knowledge Post-Processing
