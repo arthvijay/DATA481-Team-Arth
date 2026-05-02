@@ -63,9 +63,3 @@ Accurate decoding of this field is essential. Without it, a receiver cannot corr
 
 - Applies domain-knowledge-based post-processing
 - Improves prediction consistency without changing the model
-
-## Key Insight
-
-This project explores a core question:
-
-> When signal information is lost due to low sampling rates, is the limitation in the model, or in the data itself?
